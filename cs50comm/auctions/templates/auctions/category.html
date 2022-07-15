@@ -1,0 +1,22 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Add Category</h2>
+    <form action="{% url 'categories' %}" method="post">
+        {% csrf_token %}
+        <h2 class="alert">{{ message }}</h2>
+        {{ form }}
+        <input type="submit", value="Submit">
+    </form>
+    <h2>View By Category</h2> 
+    {% for each in category %}
+        {{ each.title }}
+        <div>
+            {% for x in each.listings %}
+                <h4> {{ x.title }} </h4>
+                <h4> {{ x.description }} </h4>
+            {% endfor %}
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}

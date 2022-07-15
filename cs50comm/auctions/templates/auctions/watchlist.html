@@ -1,0 +1,20 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    {% for each in active_listings %}
+    <div>
+        {{each.title}}
+        {{each.description}}
+        <img src="{{each.image}}" style="max-width:60px;max-height: 60px;">
+    </div>
+    {% endfor %}
+    <hr>
+    <h2>Inactive Listings</h2>
+    {% for each in inactive_listings %}
+    <div>
+        {{each.title}}
+        {{each.description}}
+    </div>
+    {% endfor %} 
+{% endblock %}
