@@ -13,8 +13,10 @@
         {{ each.title }}
         <div>
             {% for x in each.listings %}
-                <h4> {{ x.title }} </h4>
-                <h4> {{ x.description }} </h4>
+                {% if x.active == True %}
+                    <h4> {{ x.title }} </h4>
+                    <image src="media/{{ x.image }}">
+                {% endif %}
             {% endfor %}
         </div>
         <hr>

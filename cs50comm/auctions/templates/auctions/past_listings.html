@@ -4,15 +4,10 @@
     <h2>Active Listings</h2>
 
     {% for each in all_listings%}
-        {% if each.active == True %}
+        {% if each.active == False %}
             <div style="border-style: inset;"> 
                 <h2 style="text-align: center;">{{each.title}}</h2>
                 <h5>{{each.description}}</h5>
-                {% if each.image == None %}
-                    <image src="media/no_image.jpeg"></image>
-                {% else %}
-                    <image src="media/{{ each.image }}"></image>
-                {% endif %}
                 <h5>${{each.startingBid|floatformat:2}}</h5>
                 <a href="{% url 'listing' each.id%}">View Listing</a>
             </div>

@@ -1,20 +1,43 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Active Listings</h2>
-    {% for each in active_listings %}
-    <div>
-        {{each.title}}
-        {{each.description}}
-        <img src="{{each.image}}" style="max-width:60px;max-height: 60px;">
+    <h2>Recently Bidded</h2>
+    {% for each in bidded %}
+    <div style="border-style: inset;"> 
+        <h2 style="text-align: center;">{{each.title}}</h2>
+        <h5>{{each.description}}</h5>
+        <h5>${{each.startingBid|floatformat:2}}</h5>
+        <a href="{% url 'listing' each.id%}">View Listing</a>
     </div>
     {% endfor %}
     <hr>
-    <h2>Inactive Listings</h2>
-    {% for each in inactive_listings %}
-    <div>
-        {{each.title}}
-        {{each.description}}
+    <h2>Won Listings</h2>
+    {% for each in won %}
+    <div style="border-style: inset;"> 
+        <h2 style="text-align: center;">{{each.title}}</h2>
+        <h5>{{each.description}}</h5>
+        <h5>${{each.startingBid|floatformat:2}}</h5>
+        <a href="{% url 'listing' each.id%}">View Listing</a>
+    </div>
+    {% endfor %}
+    <hr>
+    <h2>Scouted Listings</h2>
+    {% for each in scouted %}
+    <div style="border-style: inset;"> 
+        <h2 style="text-align: center;">{{each.title}}</h2>
+        <h5>{{each.description}}</h5>
+        <h5>${{each.startingBid|floatformat:2}}</h5>
+        <a href="{% url 'listing' each.id%}">View Listing</a>
     </div>
     {% endfor %} 
+    <hr>
+    <h2>Expired Listings</h2>
+    {% for each in expired %}
+    <div style="border-style: inset;"> 
+        <h2 style="text-align: center;">{{each.title}}</h2>
+        <h5>{{each.description}}</h5>
+        <h5>${{each.startingBid|floatformat:2}}</h5>
+        <a href="{% url 'listing' each.id%}">View Listing</a>
+    </div>
+    {% endfor %}  
 {% endblock %}

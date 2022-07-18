@@ -1,0 +1,74 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Viewing Listing</h2>
+    {{listing.title}}
+    <h1>{{bidmessage}}</h1>
+
+    <h1>Comments</h1>
+    {% for each in comments %}
+    <div>{{each}}</div>
+    {% endfor %}
+    <div style="border-style: inset;"> 
+        <h5>Add A Comment</h5>
+        <form action="{% url 'listing' listing.id %}" method="post">
+            {% csrf_token %}
+            <h2 class="alert">{{ message }}</h2>
+            {{ form }}
+            <input type="submit", value="Add Comment">
+        </form>
+    </div>
+    <div>
+        <h1>Bidding</h1>
+        {% if owner == False %}
+            {% if listing.active == False and listing.buyer == user %}
+            <h5>Congratulations, you have won this listing</h5>
+            {% endif %}
+            {% if listing.currentBid == None %}
+            <h5>Be the first to bid!</h5>
+            <h5>Starting Bid: ${{listing.startingBid|floatformat:2}}</h5>
+            {% else %}
+            <h5>Current Bid: ${{listing.currentBid|floatformat:2}} by {{listing.buyer}}</h5>
+            {% endif %}
+            <form action="{% url 'add_bid' listing.id %}" method="post">
+                {% csrf_token %}
+                <h2 class="alert">{{ message }}</h2>
+                {{ bid_form }}
+                <input type="submit", value="Submit Bid">
+            </form> 
+        {% else %}
+            {% if listing.currentBid == None %}
+                <h5>No one has bid on your listing yet!</h5>
+            {% else %}
+                <h5>Current bid on your listing: ${{listing.currentBid|floatformat:2}}</h5>
+            {% endif %}
+        {% endif %}
+    </div>
+    <h1>Interact With Watchlist</h1>
+        {% if status == True %}
+        <h4>Remove from watch list</h4>
+        <div style="border-style: inset;">
+        <a href="{% url 'remove_from_watchlist' listing.id%}">Remove From Watchlist</a>
+        </div>
+        {% else %}
+        <h4>Add to watch list</h4>
+        <div style="border-style: inset;">
+        <a href="{% url 'add_to_watchlist' listing.id%}">Add To Watchlist</a>
+        </div>
+        {% endif %}
+    <div>
+        {% if owner == True %}
+            <h1>Publisher Features</h1>
+            {% if listing.active == True %}
+                <div style="border-style: inset;">
+                    <a href="{% url 'close_listing' listing.id%}">Close Listing</a>
+                </div> 
+            {% else %}
+                <div style="border-style: inset;">
+                    <a href="{% url 'index'%}">Listing Is Closed, Return to Home</a>
+                </div>  
+            {% endif %}
+        {% endif %}
+    </div>
+    <a href="{% url 'index'%}">Go Back</a>
+{% endblock %}

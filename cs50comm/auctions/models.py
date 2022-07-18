@@ -2,8 +2,6 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
  
-
-
 class User(AbstractUser):
     pass
 
@@ -25,11 +23,10 @@ class Listing(models.Model):
     publisher = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posted_listings")
     watchers = models.ManyToManyField(User, blank=True, related_name="watched_listings")
     buyer = models.ForeignKey(User, blank=True, null=True, on_delete=models.PROTECT)
+    image = models.ImageField(null=True, blank=True, upload_to="images/")
 
     def __str__(self):
         return f"{self.title} for {self.startingBid} published by {self.publisher}"
-
-
 
 class Comments(models.Model):
     commenter = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_comments")
@@ -38,7 +35,7 @@ class Comments(models.Model):
     commentDate = models.DateTimeField(default=timezone.now)
     
     def __str__(self):
-        return f"{self.commenter} on {self.post}: {self.content}"
+        return f"{self.commenter}: {self.content}"
 
 
 class Bid(models.Model):

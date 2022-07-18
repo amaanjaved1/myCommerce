@@ -3,13 +3,15 @@
 {% block body %}
     <h1>{{message}}</h1>
     <h2>Add Listing</h2>
-    <form action="{% url 'create_listing' %}" method="post">
+    <form action="{% url 'create_listing' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{form.title}}
         <br>
         {{form.description}}
         <br>
         {{form.category}}
+        <br>
+        {{form.image}}
         <br>
         {{form.startingBid}}
         <br>
