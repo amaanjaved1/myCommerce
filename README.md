@@ -8,3 +8,5 @@ Download repository and run as any other django application. Start by registerin
 
 ## TECH STACK: 
 Django, Python, HTML/CSS, Bootstrap
+
+pip install pillow
