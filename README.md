@@ -1,4 +1,4 @@
-# Commerce Website -
+# Commerce Website (No Styling) -
 Ecommerce website sumulator built to test my skills of database manipulation (doesn't contain css).
 
 ## Description
